@@ -23,7 +23,6 @@ import { ErrorInterceptionProvider } from './_services/error.interceptor';
       FormsModule
    ],
    providers: [
-      AuthService,
       ErrorInterceptionProvider
    ],
    bootstrap: [
