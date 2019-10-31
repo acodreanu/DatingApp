@@ -31,7 +31,8 @@ namespace DatingApp.API.Dtos
         public DateTime LastActive { get; set; }
 
         public UserForRegisterDto() {
-            LastActive = Created = DateTime.Now;
+            LastActive = DateTime.Now;
+            Created = DateTime.Now;
         }
     }
 }
