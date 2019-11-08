@@ -8,17 +8,15 @@
       <li *ngFor="let message of messages">
         <!-- to them -->
         <div *ngIf="message.senderId == recipientId">
-          <span class="chat-img float-left">
+          <span class="chat-img float-left mr-2">
             <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="rounded-circle">
           </span>
           <div class="chat-body">
             <div class="header">
               <strong class="primary-fond">{{message.senderKnownAs}}</strong>
               <small class="text-muted float-right">
-                <span class="fa fa-clock-o">{{message.messageSent | timeAgo}}</span>
+                <span class="fa fa-clock-o"> {{message.messageSent | timeAgo}}</span>
                 
-                <span *ngIf="!message.isRead" class="text-danger">(unread)</span>
-                <span *ngIf="message.isRead" class="text-success">(Read {{message.dateRead | timeAgo}})</span>
               </small>
             </div>
             <p>{{message.content}}</p>
@@ -27,13 +25,15 @@
 
         <!-- to me -->
         <div *ngIf="message.senderId != recipientId">
-          <span class="chat-img float-right">
+          <span class="chat-img float-right ml-2">
             <img src="{{message.senderPhotoUrl}}" alt="{{message.senderKnownAs}}" class="rounded-circle">
           </span>
           <div class="chat-body">
             <div class="header">
               <small class="text-muted">
-                  <span class="fa fa-clock-o">{{message.messageSent | timeAgo}}</span>
+                  <span class="fa fa-clock-o"> {{message.messageSent | timeAgo}}</span>
+                  <span *ngIf="!message.isRead" class="text-danger"> (unread)</span>
+                  <span *ngIf="message.isRead" class="text-success"> (Read {{message.dateRead | timeAgo}})</span>
               </small>
               <strong class="primary-fond float-right">{{message.senderKnownAs}}</strong>
             </div>
