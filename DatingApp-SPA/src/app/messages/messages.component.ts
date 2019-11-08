@@ -28,13 +28,24 @@ export class MessagesComponent implements OnInit {
 
   loadMessages() {
     this.userService.getMessages(this.authService.decodedToken.nameid,
-      this.pagination.currentPage, this.pagination.itemsPerPage, this.pagination.totalPages)
+      this.pagination.currentPage, this.pagination.itemsPerPage, this.messageContainer)
       .subscribe((res: PaginatedResult<Message[]>) => {
         this.messages = res.result;
         this.pagination = res.pagination;
       }, error => {
         this.alertify.error(error);
       });
+  }
+
+  deleteMessage(id: number) {
+    this.alertify.confirm('Are you sure you want to delete this message?', () => {
+      this.userService.deleteMessage(id, this.authService.decodedToken.nameid).subscribe(() => {
+        this.messages.splice(this.messages.findIndex(m => m.id == id), 1);
+        this.alertify.success('Message has been deleted');
+      }, error => {
+        this.alertify.error('Failed to delete the message');
+      });
+    });
   }
 
   pageChanged(event: any): void {
